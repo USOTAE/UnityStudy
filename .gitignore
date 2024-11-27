@@ -1,0 +1,12 @@
+2DMetroidvaniaDemo01/Assets/ImportAssets
+2DMetroidvaniaDemo01/Library
+2DMetroidvaniaDemo01/Logs
+2DMetroidvaniaDemo01/obj
+2DMetroidvaniaDemo01/Temp
+2DMetroidvaniaDemo01/UserSettings
+2DMetroidvaniaDemo01/.vs
+
+*.meta
+2DMetroidvaniaDemo01/.vsconfig
+2DMetroidvaniaDemo01/2DMetroidvaniaDemo01.sln
+2DMetroidvaniaDemo01/Assembly-CSharp.csproj

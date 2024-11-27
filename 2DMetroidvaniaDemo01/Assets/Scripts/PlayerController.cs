@@ -82,7 +82,6 @@ public class PlayerController : MonoBehaviour
         {
             PlayerRig.velocity = new Vector2(XInput * PlayerSpeed, PlayerRig.velocity.y);
         }
-        //PlayerRig.velocity = new Vector2(XInput * PlayerSpeed, PlayerRig.velocity.y);
             
         //控制Idle和run的动画混合树状态
         PlayerAnimator.SetFloat("RunBlend", Mathf.Abs(XInput));
@@ -119,9 +118,14 @@ public class PlayerController : MonoBehaviour
 
     public void PlayerAttack()
     {
-        if (Input.GetKeyDown(KeyCode.J))
+        if (CanAttack)
         {
-
+            if (Input.GetKeyDown(KeyCode.J))
+            {
+                CanAttack = false;
+                PlayerAnimator.SetTrigger("Attack");
+                Invoke("AttackEnd", AttackInterval);
+            }
         }
     }
 
@@ -135,5 +139,21 @@ public class PlayerController : MonoBehaviour
         Dashing = false;
         PlayerAnimator.SetTrigger("DashEnd");
         Invoke("DashReStart", DashInterval);
+    }
+
+    public void AttackEnd()
+    {
+        CanAttack = true;
+    }
+
+    //使用动画事件来判断是否在攻击状态
+    public void AttackStartEvent()
+    {
+        Attacking = true;
+    }
+
+    public void AttackEndEvent()
+    {
+        Attacking = false;
     }
 }

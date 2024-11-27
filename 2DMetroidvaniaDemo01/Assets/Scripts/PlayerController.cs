@@ -16,13 +16,12 @@ public class PlayerController : MonoBehaviour
     public float HpNow = 100.0f;
 
     [Header("Dash")]
-    public bool CanDash = true;
-    public float DashSpeed = 20.0f;
-    public float DashDirection = 1.0f;
-
-    public float DashRead = 1.0f;
-    public float DashInterval = 2.0f;
-    public bool Dashing = false;
+    [SerializeField] private bool CanDash = true; //能否冲刺
+    [SerializeField] private float DashSpeed = 3.0f;  //冲刺时施加的速度
+    [SerializeField] private float DashDirection = 1.0f;  //冲刺的方向
+    [SerializeField] private float DashKeep = 0.5f;   //冲刺持续时间
+    [SerializeField] private float DashInterval = 2.0f;   //冲刺的间隔
+    [SerializeField] private bool Dashing = false;    //是否在冲刺状态中
 
     [Header("Attack")]
     public bool CanAttack = true;
@@ -43,7 +42,23 @@ public class PlayerController : MonoBehaviour
     {
         PlayerMove();
         PlayerJump();
+        PlayerDash();
         PlayerAttack();
+    }
+
+    public void PlayerDash()
+    {
+        if(CanDash)
+        {
+            if (Input.GetKeyDown(KeyCode.LeftShift))
+            {
+                CanDash = false;
+                Dashing = true;
+                PlayerAnimator.SetTrigger("DashStart");
+                Invoke("DashEnd", DashKeep);
+            }
+        }
+
     }
 
     public void PlayerMove()
@@ -51,43 +66,42 @@ public class PlayerController : MonoBehaviour
         //获取X轴的输入
         float XInput = Input.GetAxisRaw("Horizontal");
 
-        if (CanDash)
-        {
-            //冲刺
-            PlayerRig.velocity = new Vector2(DashSpeed * DashDirection, 0);
 
-            CanDash = false;    //后面需要注释
+        //检测玩家是否在攻击状态(攻击时不可移动)
+        if (Attacking)
+        {
+            XInput = 0;
+        }
+
+        //设置X Y轴速度，其中Y轴速度为自身代表无法在Y轴移动
+        if (Dashing)
+        {
+            PlayerRig.velocity = new Vector2(DashSpeed * DashDirection, 0);
         }
         else
         {
-            //检测玩家是否在攻击状态(攻击时不可移动)
-            if (Attacking)
-            {
-                XInput = 0;
-            }
-
-            //设置X Y轴速度，其中Y轴速度为自身代表无法在Y轴移动
             PlayerRig.velocity = new Vector2(XInput * PlayerSpeed, PlayerRig.velocity.y);
-            
-            //控制Idle和run的动画混合树状态
-            PlayerAnimator.SetFloat("RunBlend", Mathf.Abs(XInput));
-
-            if (XInput > 0)
-            {
-                //记录最后输入的方向，用来决定冲刺的方向
-                DashDirection = 1;
-
-                PlayerModel.transform.rotation = Quaternion.Euler(0, 0, 0);
-            }
-            else if (XInput < 0)
-            {
-                DashDirection = -1;
-
-                //输入反向反转模型
-                PlayerModel.transform.rotation = Quaternion.Euler(0, 180, 0);
-            }
-
         }
+        //PlayerRig.velocity = new Vector2(XInput * PlayerSpeed, PlayerRig.velocity.y);
+            
+        //控制Idle和run的动画混合树状态
+        PlayerAnimator.SetFloat("RunBlend", Mathf.Abs(XInput));
+
+        if (XInput > 0)
+        {
+            //记录最后输入的方向，用来决定冲刺的方向
+            DashDirection = 1;
+
+            PlayerModel.transform.rotation = Quaternion.Euler(0, 0, 0);
+        }
+        else if (XInput < 0)
+        {
+            DashDirection = -1;
+
+            //输入反向反转模型
+            PlayerModel.transform.rotation = Quaternion.Euler(0, 180, 0);
+        }
+        
     }
 
     public void PlayerJump()
@@ -116,12 +130,10 @@ public class PlayerController : MonoBehaviour
         CanDash = true;
     }
 
-    public void TelEnd()
+    public void DashEnd()
     {
         Dashing = false;
         PlayerAnimator.SetTrigger("DashEnd");
         Invoke("DashReStart", DashInterval);
-        //AttackEndEvent();
-
     }
 }

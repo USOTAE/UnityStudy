@@ -7566,7 +7566,7 @@ MonoBehaviour:
   CanDash: 1
   DashSpeed: 20
   DashDirection: 1
-  DashRead: 1
+  DashKeep: 0.3
   DashInterval: 2
   Dashing: 0
   CanAttack: 1

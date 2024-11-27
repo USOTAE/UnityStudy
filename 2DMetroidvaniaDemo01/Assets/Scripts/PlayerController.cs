@@ -125,6 +125,19 @@ public class PlayerController : MonoBehaviour
                 CanAttack = false;
                 PlayerAnimator.SetTrigger("Attack");
                 Invoke("AttackEnd", AttackInterval);
+            
+            }
+            else if (Input.GetKeyDown(KeyCode.K))
+            {
+                //Skill1
+            }
+            else if (Input.GetKeyDown(KeyCode.L))
+            {
+                //Skill2
+            }
+            else if (Input.GetKeyDown(KeyCode.U))
+            {
+                //Skill3
             }
         }
     }
@@ -155,5 +168,11 @@ public class PlayerController : MonoBehaviour
     public void AttackEndEvent()
     {
         Attacking = false;
+    }
+
+    //绑定动画事件生成普通攻击特效
+    public void AttackEffectEvent()
+    {
+        Instantiate(AttackBox, AttackBoxLocation.transform.position, AttackBoxLocation.transform.rotation);
     }
 }

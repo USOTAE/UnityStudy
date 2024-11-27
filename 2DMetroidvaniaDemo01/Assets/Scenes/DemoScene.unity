@@ -7572,8 +7572,8 @@ MonoBehaviour:
   CanAttack: 1
   Attacking: 0
   AttackInterval: 1
-  AttackBox: {fileID: 0}
-  AttackBoxLocation: {fileID: 0}
+  AttackBox: {fileID: 5812936404936642971, guid: eae3297ee0ec3104cb0f16f33c036ea3, type: 3}
+  AttackBoxLocation: {fileID: 1088117571}
 --- !u!95 &682032424
 Animator:
   serializedVersion: 7
@@ -10048,6 +10048,37 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1bebafe46ad6c91498badf5d89804451, type: 3}
+--- !u!1 &1088117571
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1088117572}
+  m_Layer: 0
+  m_Name: AttackBoxLocation
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1088117572
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1088117571}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.91400146, y: 1.8100001, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 467296139}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1107268249
 GameObject:
   m_ObjectHideFlags: 0
@@ -10681,7 +10712,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: -2364307010229973598, guid: dde2588f5e0bc7b4ab407c1ae99bd5c1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1088117572}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: -3791651542596152443, guid: dde2588f5e0bc7b4ab407c1ae99bd5c1, type: 3}
 --- !u!1 &1173837461

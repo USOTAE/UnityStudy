@@ -25,12 +25,12 @@ public class PlayerGroundedState : PlayerState
         //使空中冲刺能衔接下落的动画
         if (!player.IsGroundDetected())
         {
-            stateMachine.ChangeState(player.AirState);
+            stateMachine.ChangeState(player.airState);
         }
 
         if(Input.GetKeyDown(KeyCode.Space) && player.IsGroundDetected())
         {
-            stateMachine.ChangeState(player.JumpState);
+            stateMachine.ChangeState(player.jumpState);
         }
     }
 }

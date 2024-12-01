@@ -32,29 +32,29 @@ public class Player : MonoBehaviour
     #endregion
 
     #region States
-    public PlayerStateMachine StateMachine { get; private set; }
+    public PlayerStateMachine stateMachine { get; private set; }
 
-    public PlayerIdleState IdleState { get; private set; }
+    public PlayerIdleState idleState { get; private set; }
 
-    public PlayerMoveState MoveState { get; private set; }
+    public PlayerMoveState moveState { get; private set; }
 
-    public PlayerJumpState JumpState { get; private set; }
+    public PlayerJumpState jumpState { get; private set; }
 
-    public PlayerAirState AirState { get; private set; }
+    public PlayerAirState airState { get; private set; }
 
-    public PlayerDashState DashState { get; private set; }
+    public PlayerDashState dashState { get; private set; }
 
     #endregion
 
     private void Awake()
     {
-        StateMachine = new PlayerStateMachine();
+        stateMachine = new PlayerStateMachine();
 
-        IdleState = new PlayerIdleState(this, StateMachine, "Idle");
-        MoveState = new PlayerMoveState(this, StateMachine, "Move");
-        JumpState = new PlayerJumpState(this, StateMachine, "Jump");
-        AirState = new PlayerAirState(this, StateMachine, "Jump");
-        DashState = new PlayerDashState(this, StateMachine, "Dash");
+        idleState = new PlayerIdleState(this, stateMachine, "Idle");
+        moveState = new PlayerMoveState(this, stateMachine, "Move");
+        jumpState = new PlayerJumpState(this, stateMachine, "Jump");
+        airState = new PlayerAirState(this, stateMachine, "Jump");
+        dashState = new PlayerDashState(this, stateMachine, "Dash");
     }
 
     private void Start()
@@ -62,12 +62,12 @@ public class Player : MonoBehaviour
         anim = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody2D>();
 
-        StateMachine.Initialize(IdleState);
+        stateMachine.Initialize(idleState);
     }
 
     public void Update()
     {
-        StateMachine.currentState.Update();
+        stateMachine.currentState.Update();
         CheckForDashInput();
     }
 
@@ -83,7 +83,7 @@ public class Player : MonoBehaviour
             {
                 dashDir = facingDir;
             }
-            StateMachine.ChangeState(DashState);
+            stateMachine.ChangeState(dashState);
         }
     }
 

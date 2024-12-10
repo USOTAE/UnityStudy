@@ -1,3 +1,11 @@
 *.meta
 
+My2DRRG01/Library
+My2DRRG01/Logs
+My2DRRG01/Temp
+My2DRRG01/UserSettings
+My2DRRG01/.vs
+My2DRRG01/.vsconfig
+My2DRRG01/My2DRRG01.sln
+
 
